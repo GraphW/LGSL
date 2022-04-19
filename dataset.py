@@ -15,11 +15,11 @@ class fMRIDataset(data.Dataset):
                 self.filename.append(line.strip('\n'))
 
     def __getitem__(self, index):
-        # 迭代的返回一个数据和一个标签
+         
         file_name = self.filename[index][2:]
         # print(file_name)
 
-        # 读取方式改变一下就行了
+        
         # wb_pd = pd.read_excel(file_name, header=None, engine='openpyxl')
         wb = np.load(file_name)
         wb_pd = DataFrame(wb)
@@ -38,7 +38,7 @@ class fMRIDataset(data.Dataset):
 def load_fMRI_dataset(fMRI_root, dataset=fMRIDataset, batch_size=32, shuffle=True, print_dataset=False):
     train_root = os.path.join(fMRI_root, 'train_set.txt')
     valid_root = os.path.join(fMRI_root, 'val_set.txt')
-    test_root = os.path.join(fMRI_root, 'test_set.txt')  # 先将数据导入再进行划分
+    test_root = os.path.join(fMRI_root, 'test_set.txt')   
 
     train_dataset = dataset(root=train_root)
     valid_dataset = dataset(root=valid_root)

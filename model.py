@@ -106,7 +106,7 @@ class GraphLearning(nn.Module):
         self.gat = GAT(n_hid, n_hid=n_hid, dropout=gat_dropout, alpha=0.2, n_heads=num_heads)
         self.f_2 = MLP(n_hid * 6, n_hid, 1, mlp_dropout)
         self.f_3 = MLP(n_in, n_hid, n_hid, mlp_dropout)
-        self.f_4 = MLP(n_in, n_hid, n_hid, mlp_dropout)
+        self.f_4 = MLP(n_hid, n_hid, n_hid, mlp_dropout)
         # self.f_4 = nn.Linear(node_labels, n_out_reserved)
         # self.f_5 = MLP(2 * n_out_reserved, n_hid, n_hid, mlp_dropout)
         self.f_6 = MLP(n_hid*2, n_hid, n_hid, mlp_dropout)

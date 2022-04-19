@@ -27,7 +27,7 @@ for root_dir, sub_dirs, _ in os.walk(old_path):
         file_names = list(filter(lambda x: x != 'ROI_CenterOfMass.xlsx', file_names))
         for file in file_names:
 
-            # 进一步增强,加入噪声
+             
             read_path = os.path.join(old_path, sub_dir, file)
             init_data = pd.read_excel(read_path, header=None)
             n = np.array(init_data)
@@ -45,7 +45,7 @@ for root_dir, sub_dirs, _ in os.walk(old_path):
                 file_save_name = re.sub(r'.xlsx', '_%i.npy' % i, file)
                 noised_file_save_name = re.sub(r'.xlsx', '_noised_%i.npy' % i, file)
                 noised_file_save_name2 = re.sub(r'.xlsx', '_noised2_%i.npy' % i, file)
-                # 存储为npy
+                 
                 np.save(os.path.join(save_dir, file_save_name), single_data)
                 np.save(os.path.join(save_dir, noised_file_save_name), noised_single_data)
                 np.save(os.path.join(save_dir, noised_file_save_name2), noised_single_data2)

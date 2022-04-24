@@ -14,12 +14,8 @@ class fMRIDataset(data.Dataset):
             for line in f.readlines():
                 self.filename.append(line.strip('\n'))
 
-    def __getitem__(self, index):
-         
-        file_name = self.filename[index][2:]
-        # print(file_name)
-
-        
+    def __getitem__(self, index):         
+        file_name = self.filename[index][2:]        
         # wb_pd = pd.read_excel(file_name, header=None, engine='openpyxl')
         wb = np.load(file_name)
         wb_pd = DataFrame(wb)
@@ -28,7 +24,6 @@ class fMRIDataset(data.Dataset):
         raw_data = torch.tensor(data=raw_data.values)
         label = self.filename[index][0]
         label = torch.tensor(int(label))
-
         return raw_data, label
 
     def __len__(self):

@@ -18,7 +18,7 @@ from model import GraphLearning
 
 from utils import label_accuracy, label_cross_entropy, edge_emb
 
-
+# Related parameters
 def parse():
     parser = argparse.ArgumentParser()
     parser.add_argument('--seed', type=int, default=-1, help='Random seed.')  # 随机种子
@@ -230,7 +230,8 @@ if __name__ == "__main__":
     node_class = torch.from_numpy(node_class.values)
     node_class = F.one_hot(node_class, num_classes=7).float().squeeze(1)
     node_class = node_class.to(device)
-
+    
+    # Construct the model
     model = GraphLearning(args.timesteps, args.timesteps_reserved, args.encoder_hidden, args.class_num,
                           args.reserved_hidden, args.node_labels, args.num_region, args.gat_dropout, args.num_heads,
                           args.mlp_dropout)
@@ -263,17 +264,16 @@ if __name__ == "__main__":
     best_val_acc = 0
     best_epoch = 0
     for epoch in range(args.epochs):
-
         val_loss, val_acc = train(epoch, best_val_loss, best_val_acc, args, param_dict)
         if val_loss < best_val_loss:
             best_val_loss = val_loss
             best_epoch = epoch
             print('best epoch:{},best val_loss:{}\n'.format(epoch, val_loss), file=log)
 
-    print(best_val_acc)
+ 
     print("Optimization Finished!", file=log)
     print("Best Epoch: {:04d}".format(best_epoch), file=log)
-    print("Best Epoch: {:04d}".format(best_epoch + 1))
+    print("Best Epoch: {:04d}".format(best_epoch))
 
     metric_dict, real_l, pred_l = test(args, param_dict)
 

@@ -3,7 +3,7 @@ import torch
 import torch.nn.functional as F
 from utils import gumbel_softmax
 
-
+# Two linear layers
 class MLP(nn.Module):
     """Two-layer fully-connected ELU net with batch norm."""
 
@@ -36,7 +36,7 @@ class MLP(nn.Module):
         x = F.elu(self.fc2(x))
         return self.batch_norm(x)
 
-
+# Graph attention layer
 class GATLayer(nn.Module):
     """
     Simple PyTorch Implementation of the Graph Attention layer.
@@ -75,7 +75,7 @@ class GATLayer(nn.Module):
         else:
             return h_prime
 
-
+# Multi-headed attention layer
 class GAT(nn.Module):
     def __init__(self, n_feat, n_hid, dropout, alpha, n_heads):
         super(GAT, self).__init__()
